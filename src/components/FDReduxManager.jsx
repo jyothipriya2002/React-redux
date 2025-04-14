@@ -28,35 +28,32 @@ const FDReduxManager = () => {
     <div className="container mt-4">
       <div className="card p-4 shadow" style={{ boxShadow: '0 0 40px rgba(173, 216, 230, 0.5)' }}>
         <h3 className="mb-4 text-primary">FD Manager</h3>
-        <div className="row g-3 mb-3">
-          <div className="col-md-4">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Amount"
-              value={amount}
-              onChange={e => setAmount(e.target.value)}
-            />
-          </div>
-          <div className="col-md-4">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Tenure (months)"
-              value={tenure}
-              onChange={e => setTenure(e.target.value)}
-            />
-          </div>
-          <div className="col-md-4">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Interest Rate"
-              value={rate}
-              onChange={e => setRate(e.target.value)}
-            />
-          </div>
+
+        {/* Stacked input fields */}
+        <div className="mb-3">
+          <input
+            type="number"
+            className="form-control mb-3"
+            placeholder="Enter Fixed Deposit Amount"
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
+          />
+          <input
+            type="number"
+            className="form-control mb-3"
+            placeholder="Enter Tenure in Months"
+            value={tenure}
+            onChange={e => setTenure(e.target.value)}
+          />
+          <input
+            type="number"
+            className="form-control mb-3"
+            placeholder="Enter Interest Rate"
+            value={rate}
+            onChange={e => setRate(e.target.value)}
+          />
         </div>
+
         <button className="btn btn-primary mb-4" onClick={handleAddFD}>Add FD</button>
 
         <ul className="list-group">
@@ -82,3 +79,4 @@ const FDReduxManager = () => {
 };
 
 export default FDReduxManager;
+
