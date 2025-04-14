@@ -14,6 +14,9 @@ const FDReduxManager = () => {
     const id = Date.now().toString();
     dispatch(addFD({ id, amount, tenure, rate }));
     dispatch(addNotification(`FD of ₹${amount} added.`));
+    setAmount('');
+    setTenure('');
+    setRate('');
   };
 
   const handleMature = (id) => {
@@ -22,23 +25,58 @@ const FDReduxManager = () => {
   };
 
   return (
-    <div>
-      <h3>FD Manager</h3>
-      <input placeholder="Amount" onChange={e => setAmount(e.target.value)} />
-      <input placeholder="Tenure (months)" onChange={e => setTenure(e.target.value)} />
-      <input placeholder="Interest Rate" onChange={e => setRate(e.target.value)} />
-      <button onClick={handleAddFD}>Add FD</button>
+    <div className="container mt-4">
+      <div className="card p-4 shadow" style={{ boxShadow: '0 0 40px rgba(173, 216, 230, 0.5)' }}>
+        <h3 className="mb-4 text-primary">FD Manager</h3>
+        <div className="row g-3 mb-3">
+          <div className="col-md-4">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Amount"
+              value={amount}
+              onChange={e => setAmount(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Tenure (months)"
+              value={tenure}
+              onChange={e => setTenure(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Interest Rate"
+              value={rate}
+              onChange={e => setRate(e.target.value)}
+            />
+          </div>
+        </div>
+        <button className="btn btn-primary mb-4" onClick={handleAddFD}>Add FD</button>
 
-      <ul>
-        {fdList.map(fd => (
-          <li key={fd.id}>
-            ₹{fd.amount} for {fd.tenure} months @ {fd.rate}% - {fd.status}
-            {fd.status === 'Active' && (
-              <button onClick={() => handleMature(fd.id)}>Mark Matured</button>
-            )}
-          </li>
-        ))}
-      </ul>
+        <ul className="list-group">
+          {fdList.map(fd => (
+            <li
+              key={fd.id}
+              className="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div>
+                ₹{fd.amount} for {fd.tenure} months @ {fd.rate}% - <strong>{fd.status}</strong>
+              </div>
+              {fd.status === 'Active' && (
+                <button className="btn btn-sm btn-success" onClick={() => handleMature(fd.id)}>
+                  Mark Matured
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
