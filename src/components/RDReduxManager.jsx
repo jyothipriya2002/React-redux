@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRD, updateContribution } from '../features/rdSlice';
@@ -25,30 +24,39 @@ const RDReduxManager = () => {
     <div className="container mt-4">
       <div className="card p-4 shadow" style={{ boxShadow: '0 0 10px rgba(173, 216, 230, 0.5)' }}>
         <h3 className="mb-4 text-primary">RD Manager</h3>
-        <div className="row g-3 mb-3">
-          <div className="col-md-6">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Monthly Contribution"
-              value={contribution}
-              onChange={e => setContribution(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6">
-            <button className="btn btn-primary w-100" onClick={handleAddRD}>Add RD</button>
-          </div>
+
+        {/* Input Field */}
+        <div className="mb-3">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Monthly Contribution"
+            value={contribution}
+            onChange={e => setContribution(e.target.value)}
+            style={{
+              width: '100%',
+              height: '48px',
+              fontSize: '16px',
+              paddingLeft: '15px'
+            }}
+          />
         </div>
 
+        {/* Button Below Input */}
+        <div className="mb-4">
+          <button className="btn btn-primary w-100" onClick={handleAddRD}>
+            Add RD
+          </button>
+        </div>
+
+        {/* RD List */}
         <ul className="list-group">
           {rdList.map(rd => (
             <li
               key={rd.id}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              <div>
-                ₹{rd.contribution}
-              </div>
+              <div>₹{rd.contribution}</div>
               <div>
                 <button
                   className="btn btn-success btn-sm me-2"
